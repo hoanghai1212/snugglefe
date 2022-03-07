@@ -1,24 +1,68 @@
 {
-  "name": "snuggle-fe",
+  "name": "snugglefe",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint src --fix && yarn format",
+    "lint:strict": "eslint --max-warnings=0 src",
+    "typecheck": "tsc --noEmit --incremental false",
+    "test:watch": "jest --watch",
+    "test": "jest",
+    "format": "prettier -w .",
+    "format:check": "prettier -c .",
+    "release": "standard-version",
+    "push-release": "git push --follow-tags origin main",
+    "postbuild": "next-sitemap",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoanghai1212/snugglefe"
   },
   "dependencies": {
+    "@sanity/client": "^3.2.0",
+    "@sanity/uuid": "^3.0.1",
+    "argon2": "^0.28.5",
+    "axios": "^0.26.0",
+    "framer-motion": "^6.2.8",
+    "groq": "^2.15.0",
     "next": "12.1.0",
+    "nodemailer": "^6.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "sass": "^1.49.9"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/node": "17.0.21",
+    "@types/nodemailer": "^6.4.4",
     "@types/react": "17.0.39",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
+    "lint-staged": "^12.3.5",
+    "next-sitemap": "^2.5.7",
+    "prettier": "^2.5.1",
     "typescript": "4.6.2"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,}": [
+      "eslint --max-warnings=0",
+      "prettier -w"
+    ],
+    "src/**/*.{json,css,scss,md}": [
+      "prettier -w"
+    ]
   }
 }
